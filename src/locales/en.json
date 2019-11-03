@@ -1,0 +1,10 @@
+{
+  "modules": {
+    "public": "Public",
+    "civilian": "Civilian",
+    "cad": "CAD",
+    "mobile": "Mobile",
+    "case": "Case",
+    "setup": "Setup"
+  }
+}

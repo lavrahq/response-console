@@ -1,32 +1,59 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <va-app
+      :desktop-sidebar-width="desktopSidebarWidth"
+      :desktop-minibar-width="desktopMinibarWidth"
+      :desktop-topbar-height="desktopTopbarHeight"
+      :mobile-sidebar-width="mobileSidebarWidth"
+      :mobile-minibar-width="mobileMinibarWidth"
+      :mobile-topbar-height="mobileTopbarHeight"
+      :sidebar-priority="sidebarPriority"
+      :minibar-priority="minibarPriority"
+      :reverse="reverse"
+      :split="split"
+      :rtl="rtl"
+    >
+      <va-topbar :theme="theme" />
+
+      <x-minibar />
+
+      <va-sidebar theme="dark" />
+
+      <va-page />
+    </va-app>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script lang="ts">
+import { Component, Vue } from "vue-property-decorator";
+import XMinibar from "@/components/Core/Navigation/XMinibar.vue";
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+@Component({
+  components: {
+    XMinibar
   }
+})
+export default class App extends Vue {
+  /* desktop */
+  desktopSidebarWidth: Number = 220;
+  desktopMinibarWidth: Number = 55;
+  desktopTopbarHeight: Number = 0;
+
+  /* mobilr */
+  mobileSidebarWidth: Number = 0;
+  mobileMinibarWidth: Number = 0;
+  mobileTopbarHeight: Number = 50;
+
+  /* priorities */
+  sidebarPriority: Boolean = false;
+  minibarPriority: Boolean = false;
+
+  /* additional options */
+  rtl: Boolean = false;
+  reverse: Boolean = false;
+  split: Boolean = false;
+
+  /* child-component defaults */
+  theme: string = "darker";
 }
-</style>
+</script>
